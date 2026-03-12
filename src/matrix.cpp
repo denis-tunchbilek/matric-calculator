@@ -81,8 +81,9 @@ Matrix Matrix::operator-(const Matrix& other) const {
 }
 
 Matrix Matrix::operator*(const Matrix& other) const {
-    if (cols_ != other.rows_)
+    if (cols_ != other.rows_) {
         throw DimensionError("operator*: incompatible dimensions for matrix multiplication");
+    }
     Matrix result(rows_, other.cols_);
     for (int r = 0; r < rows_; ++r) {
         for (int c = 0; c < other.cols_; ++c) {
