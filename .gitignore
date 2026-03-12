@@ -1,41 +1,28 @@
-# Prerequisites
-*.d
+# Папки сборки (обязательно!)
+build/
+cmake-build-*/
+out/
 
-# Compiled Object files
-*.slo
-*.lo
-*.o
-*.obj
+# Настройки IDE (обязательно!)
+.idea/
+.vscode/
+*.swp
+*.swo
 
-# Precompiled Headers
-*.gch
-*.pch
-
-# Linker files
-*.ilk
-
-# Debugger Files
-*.pdb
-
-# Compiled Dynamic libraries
-*.so
-*.dylib
-*.dll
-
-# Fortran module files
-*.mod
-*.smod
-
-# Compiled Static libraries
-*.lai
-*.la
-*.a
-*.lib
-
-# Executables
+# Бинарные файлы (обязательно!)
 *.exe
 *.out
 *.app
+*.dll
+*.so
+*.dylib
 
-# debug information files
-*.dwo
+# Временные файлы
+*.o
+*.obj
+*.log
+*.cache
+
+# Файлы OS
+.DS_Store
+Thumbs.db
