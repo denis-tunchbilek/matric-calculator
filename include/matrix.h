@@ -15,11 +15,24 @@ public:
 
     explicit Matrix(std::vector<std::vector<double>> data);
 
-    int rows() const { return rows_; }
-    int cols() const { return cols_; }
+    int rows() const {
+        return rows_;
+    }
+    int cols() const {
+        return cols_;
+    }
 
     double& at(int r, int c);
     double  at(int r, int c) const;
+
+    static Matrix identity(int n);
+
+    Matrix transpose() const;
+
+    Matrix operator+(const Matrix& other) const;
+    Matrix operator-(const Matrix& other) const;
+    Matrix operator*(const Matrix& other) const;  // матрица * матрица
+    Matrix operator*(double scalar) const;  // матрица * скаляр
 };
 
 #endif //MATRIC_CALCULATOR_MATRIX_H

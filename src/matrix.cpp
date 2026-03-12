@@ -39,3 +39,67 @@ double Matrix::at(int r, int c) const {
     }
     return data_[r * cols_ + c];
 }
+//---
+Matrix Matrix::identity(int n) {
+    Matrix result(n, n);
+    for (int i = 0; i < n; ++i) {
+        result.at(i, i) = 1.0;
+    }
+    return result;
+}
+
+Matrix Matrix::transpose() const {
+    Matrix result(cols_, rows_);
+    for (int r = 0; r < rows_; ++r) {
+        for (int c = 0; c < cols_; ++c) {
+            result.at(c, r) = at(r, c);
+        }
+    }
+    return result;
+}
+
+Matrix Matrix::operator+(const Matrix& other) const {
+    if (rows_ != other.rows_ || cols_ != other.cols_) {
+        throw DimensionError("operator+: matrices have incompatible dimensions");
+    }
+    Matrix result(rows_, cols_);
+    for (int i = 0; i < rows_ * cols_; ++i) {
+        result.data_[i] = data_[i] + other.data_[i];
+    }
+    return result;
+}
+
+Matrix Matrix::operator-(const Matrix& other) const {
+    if (rows_ != other.rows_ || cols_ != other.cols_) {
+        throw DimensionError("operator-: matrices have incompatible dimensions");
+    }
+    Matrix result(rows_, cols_);
+    for (int i = 0; i < rows_ * cols_; ++i) {
+        result.data_[i] = data_[i] - other.data_[i];
+    }
+    return result;
+}
+
+Matrix Matrix::operator*(const Matrix& other) const {
+    if (cols_ != other.rows_)
+        throw DimensionError("operator*: incompatible dimensions for matrix multiplication");
+    Matrix result(rows_, other.cols_);
+    for (int r = 0; r < rows_; ++r) {
+        for (int c = 0; c < other.cols_; ++c) {
+            double sum = 0.0;
+            for (int k = 0; k < cols_; ++k) {
+                sum += at(r, k) * other.at(k, c);
+            }
+            result.at(r, c) = sum;
+        }
+        return result;
+    }
+}
+
+Matrix Matrix::operator*(double scalar) const {
+    Matrix result(rows_, cols_);
+    for (int i = 0; i < rows_ * cols_; ++i) {
+        result.data_[i] = data_[i] * scalar;
+    }
+    return result;
+}
